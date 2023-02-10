@@ -1,0 +1,12 @@
+US dollar (USD)
+Euro (EUR)
+Japanese yen (JPY)
+Pound sterling (GBP)
+Australian dollar (AUD)
+Canadian dollar (CAD)
+Swiss franc (CHF)
+Chinese renminbi (CNH)
+Hong Kong dollar (HKD)
+New Zealand dollar (NZD)1
+
+https://v6.exchangerate-api.com/v6/d01a325dff7c2eaf0535f8a5/latest/USD
