@@ -25,7 +25,7 @@ function printElements(response, usd) {
 
 
 function printError(error) {
-const response = JSON.parse(error, response);
+  const response = JSON.parse(error, response);
   if (response.result === "error") {
     document.querySelector('#showResponse').innerText = `There was an error in accessing data: ${response['error-type']}`;
   }
