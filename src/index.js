@@ -4,10 +4,10 @@ import './css/styles.css';
 import Currency from './currency.js';
 
 
-function exchangeRate(rate) {
-  let promise = Currency.exchangeRate(rate);
+function exchangeRate() {
+  let promise = Currency.exchangeRate();
   promise.then(function(response) {
-    printElements(response, rate);
+    printElements(response);
   }, function(errorMessage){
     printError(errorMessage);
   });
@@ -19,13 +19,13 @@ function exchangeRate(rate) {
 
 
 
-function printElements(response, usDollars) {
-  document.querySelector('#showResponse').innerHTML = `$${usDollars}</b> in <b>${response.target_code} is <b>${response.conversion_result}</b>`;
+function printElements(response, usd) {
+  document.querySelector('#showResponse').innerHTML = `$${usd}</b> in <b>${response.target_code} is <b>${response.conversion_result}</b>`;
 }
 
 
 function printError(error) {
-  const response = JSON.parse(error.response);
+const response = JSON.parse(error, response);
   if (response.result === "error") {
     document.querySelector('#showResponse').innerText = `There was an error in accessing data: ${response['error-type']}`;
   }
@@ -35,10 +35,12 @@ function printError(error) {
 
 function handleFormSubmission(event) {
   event.preventDefault();
-//   const generate = document.getElementById('generate-input').value;
-//   generateJoke(generate);
+  const usd = document.querySelector('#usd');
+  const code = document.querySelector('code');
+  document.querySelector('#usd').value = null;
+  Currency.exchangeRate(exchangeRate, usd, code);
 }
+window.addEventListener("load", function() {
+  document.querySelector('form').addEventListener("submit", handleFormSubmission);
+});
 
-  window.addEventListener("load", function() {
-  document.getElementById("button").addEventListener("click", handleFormSubmission);
-  });
