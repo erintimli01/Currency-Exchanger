@@ -44,42 +44,8 @@ _This is an API based application that takes in US dollars and converts it to ot
 
 ## License
 
+[MIT](license.t)
+
 _Please reach out with any found bugs, questions or concerns at erintimlin@gmail.com_
 
-Copyright (c) _date_ _author name(s)_
-
-# _Currency Exchanger_
-
-## 
-
-#### By _Erin Timlin_
-
-#### __
-
-## Technologies Used
-
-- _JavaScript_
-- _HTML_
-- _CSS_
-- _Webpack_
-- _eslint_
-- _babel_
-- _jest_
-
-
-## Description
-
-_
-
-## Setup/Installation Requirements
-
-
-## Known Bugs
-
-- _None_
-
-## License
-
-_MIT_
-
-Copyright (c) _2023_ _Erin Timlin_ 
+Copyright (c) _February 2023_ _Erin Timlin_
