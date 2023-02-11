@@ -14,6 +14,7 @@ function exchangeRate() {
 }
 
 // UI Logic
+
 function printError(error) {
   const err = Object.values(error[1]);
   document.querySelector("#showResponse").innerText = `There was an error in accessing data: ${err[3]}`;
@@ -31,8 +32,8 @@ function printElements(currencyConversion) {
     document.querySelector("#showResponse").innerText = `$${usDollars} USD = ${
       newCode * usDollars} ${currencyCode}`;
   }
-
 }
+
 function handleFormSubmission(event) {
   event.preventDefault();
   exchangeRate();
