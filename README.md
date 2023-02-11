@@ -2,7 +2,7 @@
 
 #### By _Erin Timlin_
 
-#### _With the help of the [ExchangeRate API]("https://www.exchangerate-api.com") this is an application to exchange currency from US Dollars to other forms of currency_
+#### _With the help of the [ExchangeRate API](https://www.exchangerate-api.com) this is an application to exchange currency from US Dollars to other forms of currency_
 
 ## Technologies Used
 
@@ -13,7 +13,7 @@
 * _Node_
 * _ESLint_
 * _Babel_
-* _[ExchangeRateAPI]("https://www.exchangerate-api.com")_
+* _[ExchangeRateAPI](https://www.exchangerate-api.com)_
 
 ## Description
 
