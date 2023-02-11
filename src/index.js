@@ -3,44 +3,42 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './currency.js';
 
-
+// Business Logic
 function exchangeRate() {
   let promise = Currency.exchangeRate();
-  promise.then(function(response) {
-    printElements(response);
-  }, function(errorMessage){
-    printError(errorMessage);
+  promise.then(function(newCode) {
+    printElements(newCode);
+  }, function(error){
+    printError(error);
   });
 }
 
-
-
 // UI Logic
-
-
-
-function printElements(response, usd) {
-  document.querySelector('#showResponse').innerHTML = `$${usd}</b> in <b>${response.target_code} is <b>${response.conversion_result}</b>`;
-}
-
-
 function printError(error) {
-  const response = JSON.parse(error, response);
-  if (response.result === "error") {
-    document.querySelector('#showResponse').innerText = `There was an error in accessing data: ${response['error-type']}`;
-  }
+  const err = Object.values(error[1]);
+  document.querySelector("#showResponse").innerText = `There was an error in accessing data: ${err[3]}`;
 }
 
+function printElements(currencyConversion) {
+  //try consts in handleForm
+  const currencyCode = document.querySelector("#currencyCode").value;
+  const usDollars = document.querySelector("#usDollars").value;
+  const newCode = currencyConversion[0]["conversion_rates"][currencyCode];
+  //try if in printerror 
+  if(currencyConversion[0]["conversion_rates"][currencyCode] === "undefined") {
+    document.querySelector("#showResponse").innerText = `There was an error accessing data!`;
+  } else {
+    document.querySelector("#showResponse").innerText = `$${usDollars} USD = ${
+      newCode * usDollars} ${currencyCode}`;
+  }
 
-
+}
 function handleFormSubmission(event) {
   event.preventDefault();
-  const usd = document.querySelector('#usd');
-  const code = document.querySelector('code');
-  document.querySelector('#usd').value = null;
-  Currency.exchangeRate(exchangeRate, usd, code);
+  exchangeRate();
 }
+
 window.addEventListener("load", function() {
-  document.querySelector('form').addEventListener("submit", handleFormSubmission);
+  this.document.querySelector("form").addEventListener("submit", handleFormSubmission);
 });
 
