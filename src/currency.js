@@ -1,6 +1,6 @@
 export default class Currency {
   static exchangeRate() {
-    return new Promise(function(resolve,reject) {
+    return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
       const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
       request.addEventListener("loadend", function() {
@@ -16,3 +16,4 @@ export default class Currency {
     });
   }
 }
+
