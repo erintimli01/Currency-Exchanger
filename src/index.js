@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Currency from './currency.js';
 
+
 function exchangeRate() {
   let promise = Currency.exchangeRate();
   promise.then(function(newCode) {

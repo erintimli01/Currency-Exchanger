@@ -13,91 +13,145 @@ https://v6.exchangerate-api.com/v6/d01a325dff7c2eaf0535f8a5/latest/USD
 
 ${code}/${usd}
 
---index.js
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/styles.css';
-import Currency from './currency.js';
+--currency.js
 
-function exchangeRate() {
-  let promise = Currency.exchangeRate();
-  promise.then(function(response) {
-    printElements(response);
-  }, function(errorMessage){
-    printError(errorMessage);
-  });
-}
+// export default class Currency {
+//   static exchangeRate() {
+//     return new Promise(function(resolve, reject) {
+//       let request = new XMLHttpRequest();
+//       const url = `https://v6.exchangerate-api.com/v5/${process.env.API_KEY}/latest/USD`;
+//       request.addEventListener("loadend", function() {
+//         const response = JSON.parse(this.responseText);
+//         if (this.status === 200) {
+//           console.log("API call succeeded:", response);
+//           resolve(response);
+//         } else {
+//           console.error("API call failed with status code:", this.status);
+//           reject(new Error("API call failed"));
+//         }
+//       });
+//       request.open("GET", url, true);
+//       request.send();
+//     });
+//   }
+// }
+
+// export default class Currency {
+//   static exchangeRate() {
+//     return new Promise(function(printElements, printError) {
+//       let request = new XMLHttpRequest();
+//       const url = `https://v6.exchangerate-api.com/v5/${process.env.API_KEY}/latest/USD`;
+//       request.addEventListener("loadend", function() {
+//         const response = JSON.parse(this.responseText);
+//         if (this.status === 200) {
+//           printElements([response]);
+//         } else {
+//           printError([this,response]);
+//         }
+//       });
+//       request.open("GET", url, true);
+//       request.send();
+//     });
+//   }
+// }
+  
+// export default class Currency {
+//   static async exchangeRate(generate, newCode, error) {
+//     try {
+//       const response = await fetch(
+//         `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD/${generate}/${newCode}/${error}`
+//       );
+//       const jsonifiedResponse = await response.json();
+//       if (!response.ok) {
+//         const errorMessage = `${response.status} ${jsonifiedResponse.statusText}
+//         ${jsonifiedResponse.message}`;
+//         throw new Error(errorMessage);
+//       }
+//       return jsonifiedResponse;
+//     } catch (error) {
+//       return error;
+//     }
+//   }
+// }
+
+//export default class Currency {
+//   static exchangeRate(generate) {
+//     return new Promise(function(resolve, reject) {
+//       let request = new XMLHttpRequest();
+//       const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD/${generate}`;
+//       request.addEventListener("loadend", function() {
+//         const response = JSON.parse(this.responseText);
+//         console.log(response);
+//         if(response.error === false) {
+//           resolve(response);
+//         } else {
+//           reject([this, response]);
+//         }
+//       });
+//       request.open("GET", url, true);
+//       request.send();
+//     });
+//   }
+// }
+
+
+--index.js
+
+//Business Logic
+// function exchangeRate() {
+//   let promise = Currency.exchangeRate();
+//   promise.then(function(newCode) {
+//     printElements(newCode);
+//   }, function(error){
+//     printError(error);
+//   });
+// }
+
+// async function exchangeRate(generate, newCode, error) {
+//   const response = await Currency.exchangeRate(generate);
+//   if (response.conversion_rates) {
+//     printElements(newCode);
+//   } else {
+//     printError(error);
+//   }
+// }
+
 
 // UI Logic
 
-function printElements(response, usd) {
-  document.querySelector('#showResponse').innerHTML = `${usd}</b> in <b>${response.target_code} is <b>${response.conversion_result}</b>`;
-}
+// function printError(error) {
+//   const err = Object.values(error[1]);
+//   document.querySelector("#showResponse").innerText = `There was an error in accessing data: ${err[3]}`;
+// }
 
-function printError(error) {
-  const response = JSON.parse(error, response);
-  if (response.result === "error") {
-    document.querySelector('#showResponse').innerText = `There was an error in accessing data: ${response['error-type']}`;
-  }
-}
+// function printError(error) {
+//   const err = Object.values(error[1]);
+//   const errorMessage = `There was an error in accessing data: ${err[3]}`;
+//   document.querySelector("#showResponse").innerText = errorMessage;
+//   document.querySelector("#showResponse").classList.add("error"); // Add a CSS class to highlight the error
+// }
 
-function handleFormSubmission(event) {
-  event.preventDefault();
-  const usd = document.querySelector('#usd');
-  const code = document.querySelector('code');
-  document.querySelector('#usd').value = null;
-  Currency.exchangeRate(exchangeRate, usd, code);
-}
-window.addEventListener("load", function() {
-  document.querySelector('form').addEventListener("submit", handleFormSubmission);
-});
+// function printError(request, apiResponse) {
+//   document.querySelector('#showResponse').innerText = `There was an error accessing data: ${request.status} ${request.statusText}: ${apiResponse.message}`;
+// }
 
---currency.js
-export default class Currency {
-  static exchangeRate(code, usd) {
-    return new Promise(function (resolve, reject) {
-      let request = new XMLHttpRequest();
-      const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
-      request.addEventListener("loadend", function () {
-        const response = JSON.parse(this.responseText);
-        if(response.error === false) {
-          resolve(response);
-        } else {
-          reject([this, response]);
-        }
-      // if (this.status === 200) {
-      //   resolve(response);
-      // } else {
-      //   reject([this, response]);
-      // } 
-      });
-      request.open("GET", url, true);
-      request.send();
-    });
-  }
-}
+// function printError(error) {
+//   document.querySelector("#showResponse").innerText = error;
+// }
 
---html 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Currency Exchanger</title>
-</head>
-<body>
+// function printError(error, generate) {
+//   document.querySelector('#showResponse').innerText = `There was an error accessing the thing for ${generate}: ${error.message}`;
+// }
 
-  <h1>Exchange rates for US dollars</h1>
-  <p>USD to be converted:</p>
-  <form>
-    <label for="usd">$</label>
-    <input id="usd" type="text" name="usd">
-    <button type="submit">Submit</button>
-    <select id="code">
-      <option value="eur">Euro</option>
-      <option value="jpy">Japanese Yen</option>
-      <option value="gbp">Pound sterling </option>
-      <option value="aud">Australian dollar</option>
-      <option value="cad">Canadian dollar</option>
-    </select>
-  </form>
-</body>
-</html>
+
+// function printElements(currencyConversion) {
+//   const currencyCode = document.querySelector("#currencyCode").value;
+//   const usDollars = document.querySelector("#usDollars").value;
+//   const newCode = currencyConversion[0]["conversion_rates"][currencyCode];
+//   if(currencyConversion[0]["conversion_rates"][currencyCode] === undefined) {
+//     document.querySelector("#showResponse").innerText = `There was an error accessing data!`;
+//   } else {
+//     document.querySelector("#showResponse").innerText = `$${usDollars} USD = ${
+//       newCode * usDollars} ${currencyCode}`;
+//   }
+// }
