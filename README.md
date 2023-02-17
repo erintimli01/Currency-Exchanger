@@ -44,7 +44,7 @@ _This is an API based application that takes in US dollars and converts it to ot
 
 ## License
 
-[MIT](license.t)
+[MIT](license.txt)
 
 _Please reach out with any found bugs, questions or concerns at erintimlin@gmail.com_
 
